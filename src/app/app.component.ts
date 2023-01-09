@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { FormComponent } from './form/form.component';
 import { CrudService } from './services/crud.service';
@@ -26,12 +26,18 @@ export class AppComponent implements OnInit{
     ){
   }
 
-  openDialog(){
-    this.matDialog.open(FormComponent);
+  parentFunction(){
+    console.log("TERVE!??!?!??!");
   }
-  
 
-  ngOnInit(): void {
+  openDialog(){
+    this.matDialog.open(FormComponent).afterClosed()
+    .subscribe(value=>{
+      this.getTodos();
+    })
+  }
+
+  getTodos(){
     this.crud.getTodo().subscribe({
       next:(all)=>{
         this.todos = all;
@@ -39,5 +45,10 @@ export class AppComponent implements OnInit{
       error:()=>{
       }
     });
+  }
+
+
+  ngOnInit(): void {
+    this.getTodos();
   }
 }

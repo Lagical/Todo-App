@@ -1,22 +1,16 @@
 {
   "todoList": [
     {
-      "todoTitle": "Eka",
-      "todoText": "gagsagas",
-      "done": true,
+      "todoTitle": "Juuh",
+      "todoText": "etwtw",
+      "done": false,
       "id": 1
     },
     {
-      "todoTitle": "gegweg",
-      "todoText": "wegweg",
+      "todoTitle": "gewtwet",
+      "todoText": "wetwetwet",
       "done": false,
       "id": 2
-    },
-    {
-      "todoTitle": "hggwe",
-      "todoText": "werwer",
-      "done": false,
-      "id": 3
     }
   ],
   "comments": [

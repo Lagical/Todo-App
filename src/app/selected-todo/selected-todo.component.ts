@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, pluck, switchMap } from 'rxjs';
 import { EditTodoComponent } from '../edit-todo/edit-todo.component';
 import { CrudService } from '../services/crud.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 interface Todo {  
   todoTitle: string;
@@ -20,39 +21,58 @@ interface Todo {
 })
 export class SelectedTodoComponent implements OnInit {
 
-  //todos: Todo[] = [];
   todos$!: Observable<Todo>;
+  @Output() parentFunction: EventEmitter<any>= new EventEmitter();
 
   constructor(
     private crud : CrudService,
     private http: HttpClient,
+    private snackBar: MatSnackBar,
     private activatedRoute: ActivatedRoute,
     private matDialog: MatDialog
     ){
   }
 
-  /*
-  ngOnInit(): void {
-    this.crud.getTodo().subscribe({
-      next:(all)=>{
-        this.todos = all;
-      },
-      error:()=>{
-      }
-    });
-  }*/
+  checkCheckBoxvalue(event: any, data: any){
+    data.done = event.checked;
+    console.log(data);
+    this.crud.updateTodo(data, data.id)
+      .subscribe({
+        next:(all)=>{
+          
+        },
+        error:()=>{
+        }
+      })
+  }
 
-  checkCheckBoxvalue(event: any){
-    console.log(event.checked);
+  openSnackBar() {
+    this.snackBar.open("Todo successfully deleted", "Close");
   }
 
   editTodo(todo: any){
     this.matDialog.open(EditTodoComponent,{
       data: todo
     })
+    .afterClosed()
+    .subscribe(value=>{
+      this.getTodosToUpdate();
+    })
   }
 
-  ngOnInit(): void {
+  deleteTodo(id: number){
+    this.crud.deleteTodo(id).subscribe({
+      next:(all)=>{
+        this.openSnackBar();
+        this.getTodosToUpdate();
+      },
+      error:()=>{
+      }
+    }
+    )
+  }
+
+  getTodosToUpdate(){
     this.todos$ = this.activatedRoute.params.pipe(
       pluck("id"),
       switchMap((id) =>
@@ -61,5 +81,10 @@ export class SelectedTodoComponent implements OnInit {
         )
       )
     );
+  }
+
+  ngOnInit(): void {
+    this.getTodosToUpdate();
+    this.parentFunction.emit()
   }
 }

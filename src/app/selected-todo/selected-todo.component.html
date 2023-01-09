@@ -1,12 +1,13 @@
 <div *ngIf="todos$ | async as todo">
+  <h3>{{todo.todoTitle}}</h3>
     <p>{{todo.todoText}}</p>
     <section class="example-section">
-        <mat-checkbox [checked]="todo.done" (change)="checkCheckBoxvalue($event)">Done</mat-checkbox>
+        <mat-checkbox [checked]="todo.done" (change)="checkCheckBoxvalue($event, todo)">Done</mat-checkbox>
       </section>
       <button mat-icon-button (click)="editTodo(todo)">
         <mat-icon>edit</mat-icon>
       </button>
-      <button mat-icon-button>
+      <button mat-icon-button (click)="deleteTodo(todo.id)" routerLink="">
         <mat-icon>delete_outline</mat-icon>
       </button>
 </div>

@@ -22,9 +22,23 @@ export class EditTodoComponent {
     ){
     }
 
-    editTodo(){
-
+    updateTodo(){
+      this.crud.updateTodo(this.todoForm.value, this.dataToEdit.id)
+      .subscribe({
+        next:()=>{
+          this.todoForm.reset();
+          this.matDialogRef.close();
+          this.openSnackBar();
+        },
+        error:()=>{
+        }
+      })
     }
+
+    openSnackBar() {
+      this.snackBar.open("Todo successfully updated", "Close");
+    }
+
     cancel(): void {
       this.matDialogRef.close();
     }
@@ -35,8 +49,11 @@ export class EditTodoComponent {
         todoText : ['', Validators.required],
         done : false
       })
-      this.todoForm.controls['todoTitle'].setValue(this.dataToEdit.todoTitle);
-      this.todoForm.controls['todoText'].setValue(this.dataToEdit.todoText);
-      this.todoForm.controls['done'].setValue(this.dataToEdit.done);
+      this.todoForm.controls['todoTitle'].setValue(
+        this.dataToEdit.todoTitle);
+      this.todoForm.controls['todoText'].setValue(
+        this.dataToEdit.todoText);
+      this.todoForm.controls['done'].setValue(
+        this.dataToEdit.done);
     }
 }
