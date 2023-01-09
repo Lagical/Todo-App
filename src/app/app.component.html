@@ -3,8 +3,17 @@
   </mat-toolbar>
   <mat-drawer-container>
     <mat-drawer mode="side" opened>
-
+        <mat-list role="list">
+            <mat-list-item role="listitem" *ngFor="let todo of todos;">
+                <a [routerLink]="['', { outlets: { selectedTodo: ['todo', todo.id] } }]" class="link">
+                    {{todo.todoTitle}}
+                </a>
+            </mat-list-item>
+          </mat-list>
         <button class="bottom" mat-raised-button (click)="openDialog()">Add new Todo</button>
     </mat-drawer>
-    <mat-drawer-content></mat-drawer-content>
+    <mat-drawer-content>
+        <router-outlet name="selectedTodo">
+        </router-outlet>
+    </mat-drawer-content>
   </mat-drawer-container>

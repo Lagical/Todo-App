@@ -1,9 +1,22 @@
 {
   "todoList": [
     {
-      "todoTitle": "Todo App",
-      "todoText": "Finish the Todo App",
+      "todoTitle": "Eka",
+      "todoText": "gagsagas",
+      "done": true,
       "id": 1
+    },
+    {
+      "todoTitle": "gegweg",
+      "todoText": "wegweg",
+      "done": false,
+      "id": 2
+    },
+    {
+      "todoTitle": "hggwe",
+      "todoText": "werwer",
+      "done": false,
+      "id": 3
     }
   ],
   "comments": [

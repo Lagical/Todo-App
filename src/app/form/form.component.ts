@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { ApiService } from '../services/api.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { CrudService } from '../services/crud.service';
 
 @Component({
   selector: 'app-form',
@@ -15,7 +16,8 @@ export class FormComponent implements OnInit{
   constructor(
     private matDialogRef: MatDialogRef<FormComponent>, 
     private formBuilder: FormBuilder,
-    private db : ApiService
+    private crud : CrudService,
+    private snackBar: MatSnackBar
     ){
 
   }
@@ -24,16 +26,20 @@ export class FormComponent implements OnInit{
     this.matDialogRef.close();
   }
 
-  
+  openSnackBar() {
+    this.snackBar.open("Todo successfully added", "Close");
+  }
+
+
   addTodo(): void {
     if(this.todoForm.valid){
-      this.db.postTodo(this.todoForm.value).subscribe({
-        next:(res)=>{
+      this.crud.postTodo(this.todoForm.value).subscribe({
+        next:()=>{
           this.todoForm.reset();
           this.matDialogRef.close();
+          this.openSnackBar();
         },
         error:()=>{
-          alert("Error")
         }
       })
     }
@@ -42,7 +48,8 @@ export class FormComponent implements OnInit{
   ngOnInit(): void {
     this.todoForm = this.formBuilder.group({
       todoTitle : ['', Validators.required],
-      todoText : ['', Validators.required]
+      todoText : ['', Validators.required],
+      done : false
     })
   }
 }
