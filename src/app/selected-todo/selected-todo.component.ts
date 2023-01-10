@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, pluck, switchMap } from 'rxjs';
 import { EditTodoComponent } from '../edit-todo/edit-todo.component';
 import { CrudService } from '../services/crud.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DeleteConfirmComponent } from '../delete-confirm/delete-confirm.component';
 
 interface Todo {  
   todoTitle: string;
@@ -22,7 +23,6 @@ interface Todo {
 export class SelectedTodoComponent implements OnInit {
 
   todos$!: Observable<Todo>;
-  @Output() parentFunction: EventEmitter<any>= new EventEmitter();
 
   constructor(
     private crud : CrudService,
@@ -33,9 +33,9 @@ export class SelectedTodoComponent implements OnInit {
     ){
   }
 
+  //check checkbox value and update json "db"
   checkCheckBoxvalue(event: any, data: any){
     data.done = event.checked;
-    console.log(data);
     this.crud.updateTodo(data, data.id)
       .subscribe({
         next:(all)=>{
@@ -46,20 +46,34 @@ export class SelectedTodoComponent implements OnInit {
       })
   }
 
+  //alert
   openSnackBar() {
     this.snackBar.open("Todo successfully deleted", "Close");
   }
 
+  //open new dialog with prefilled form based on id, update json "db" after done editing
   editTodo(todo: any){
     this.matDialog.open(EditTodoComponent,{
       data: todo
     })
     .afterClosed()
     .subscribe(value=>{
+
       this.getTodosToUpdate();
     })
   }
 
+  //open new dialog to confirm deletion of selected todo
+  openDelete(id: number){
+    this.matDialog.open(DeleteConfirmComponent).afterClosed()
+    .subscribe(value=>{
+      if(value === "delete"){
+        this.deleteTodo(id);
+      }
+    })
+  }
+
+  //delete todo based on id and update json "db"
   deleteTodo(id: number){
     this.crud.deleteTodo(id).subscribe({
       next:(all)=>{
@@ -72,6 +86,7 @@ export class SelectedTodoComponent implements OnInit {
     )
   }
 
+  //get correct json "db" data to be displayed by id 
   getTodosToUpdate(){
     this.todos$ = this.activatedRoute.params.pipe(
       pluck("id"),
@@ -85,6 +100,5 @@ export class SelectedTodoComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTodosToUpdate();
-    this.parentFunction.emit()
   }
 }

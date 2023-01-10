@@ -22,6 +22,7 @@ export class EditTodoComponent {
     ){
     }
 
+    //update new data from form to db.json based on id
     updateTodo(){
       this.crud.updateTodo(this.todoForm.value, this.dataToEdit.id)
       .subscribe({
@@ -35,14 +36,17 @@ export class EditTodoComponent {
       })
     }
 
+    //alert
     openSnackBar() {
       this.snackBar.open("Todo successfully updated", "Close");
     }
 
+    //close dialog without doing actions
     cancel(): void {
       this.matDialogRef.close();
     }
 
+    //create and prefill form
     ngOnInit(): void {
       this.todoForm = this.formBuilder.group({
         todoTitle : ['', Validators.required],

@@ -21,13 +21,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SelectedTodoComponent } from './selected-todo/selected-todo.component';
 import { EditTodoComponent } from './edit-todo/edit-todo.component';
+import { DeleteConfirmComponent } from './delete-confirm/delete-confirm.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FormComponent,
     SelectedTodoComponent,
-    EditTodoComponent
+    EditTodoComponent,
+    DeleteConfirmComponent
   ],
   imports: [
     BrowserModule,

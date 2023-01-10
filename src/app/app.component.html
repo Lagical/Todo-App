@@ -5,7 +5,8 @@
     <mat-drawer mode="side" opened>
         <mat-list role="list">
             <mat-list-item role="listitem" *ngFor="let todo of todos;">
-                <a [routerLink]="['', { outlets: { selectedTodo: ['todo', todo.id] } }]" class="link">
+                <a [routerLink]="['', { outlets: { selectedTodo: ['todo', todo.id] } }]" 
+                [ngClass]="todo.done? 'linethrough' : 'link'">
                     {{todo.todoTitle}}
                 </a>
             </mat-list-item>

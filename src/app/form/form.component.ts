@@ -22,15 +22,18 @@ export class FormComponent implements OnInit{
 
   }
 
+  //close dialog without doing actions
   cancel(): void {
     this.matDialogRef.close();
   }
 
+  //alert
   openSnackBar() {
     this.snackBar.open("Todo successfully added", "Close");
   }
 
 
+  //add data from form to db.json
   addTodo(): void {
     if(this.todoForm.valid){
       this.crud.postTodo(this.todoForm.value).subscribe({
@@ -45,6 +48,7 @@ export class FormComponent implements OnInit{
     }
   }
 
+  //create form
   ngOnInit(): void {
     this.todoForm = this.formBuilder.group({
       todoTitle : ['', Validators.required],

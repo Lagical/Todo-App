@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { FormComponent } from './form/form.component';
 import { CrudService } from './services/crud.service';
@@ -26,10 +26,7 @@ export class AppComponent implements OnInit{
     ){
   }
 
-  parentFunction(){
-    console.log("TERVE!??!?!??!");
-  }
-
+  //open new dialog with form to fill Todo info, after saved update todos shown
   openDialog(){
     this.matDialog.open(FormComponent).afterClosed()
     .subscribe(value=>{
@@ -37,6 +34,7 @@ export class AppComponent implements OnInit{
     })
   }
 
+  //update todos shown
   getTodos(){
     this.crud.getTodo().subscribe({
       next:(all)=>{
@@ -49,6 +47,11 @@ export class AppComponent implements OnInit{
 
 
   ngOnInit(): void {
+    //this.getTodos();
+    this.crud.todoUpdated.subscribe(data=>{
+      console.log(data.id+ " in parent component")
+      this.getTodos();
+    })
     this.getTodos();
   }
 }

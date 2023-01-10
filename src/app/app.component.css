@@ -10,3 +10,10 @@ mat-drawer-container {
     color: white;
     text-decoration: none;
  }
+
+ .linethrough{
+   color: white;
+   text-decoration: line-through;
+   text-decoration-color: black;
+   text-decoration-thickness: 4px;
+ }
