@@ -1,52 +1,16 @@
 {
   "todoList": [
     {
-      "todoTitle": "sag",
-      "todoText": "sgsgs",
+      "todoTitle": "Pyykit",
+      "todoText": "Pese pyykit",
+      "done": false,
+      "id": 1
+    },
+    {
+      "todoTitle": "Ruoka",
+      "todoText": "Käy kaupassa ja valmista ruoka",
       "done": false,
       "id": 2
-    },
-    {
-      "todoTitle": "hsdhs",
-      "todoText": "hdshsdh",
-      "done": false,
-      "id": 3
-    },
-    {
-      "todoTitle": "Testi1",
-      "todoText": "juu",
-      "done": false,
-      "id": 4
-    },
-    {
-      "todoTitle": "gasgasg",
-      "todoText": "asgasgasga",
-      "done": false,
-      "id": 5
-    },
-    {
-      "todoTitle": "tqtqtwe",
-      "todoText": "wtqwtqttwetgd",
-      "done": false,
-      "id": 6
-    },
-    {
-      "todoTitle": "Juuu",
-      "todoText": "gasgasg",
-      "done": false,
-      "id": 7
-    },
-    {
-      "todoTitle": "gasgas",
-      "todoText": "agasgasg",
-      "done": false,
-      "id": 8
-    },
-    {
-      "todoTitle": "Jep",
-      "todoText": "geagaga",
-      "done": false,
-      "id": 9
     }
   ],
   "comments": [

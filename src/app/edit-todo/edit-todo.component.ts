@@ -27,6 +27,7 @@ export class EditTodoComponent {
       this.crud.updateTodo(this.todoForm.value, this.dataToEdit.id)
       .subscribe({
         next:()=>{
+          this.crud.updateTodos();
           this.todoForm.reset();
           this.matDialogRef.close();
           this.openSnackBar();
@@ -36,9 +37,11 @@ export class EditTodoComponent {
       })
     }
 
-    //alert
+    //alert lasting 5 seconds
     openSnackBar() {
-      this.snackBar.open("Todo successfully updated", "Close");
+      this.snackBar.open("Todo successfully updated", "Close",{ 
+        duration: 5000
+    });
     }
 
     //close dialog without doing actions
@@ -49,7 +52,7 @@ export class EditTodoComponent {
     //create and prefill form
     ngOnInit(): void {
       this.todoForm = this.formBuilder.group({
-        todoTitle : ['', Validators.required],
+        todoTitle : ['', [Validators.required, Validators.maxLength(15)]],
         todoText : ['', Validators.required],
         done : false
       })
@@ -60,4 +63,5 @@ export class EditTodoComponent {
       this.todoForm.controls['done'].setValue(
         this.dataToEdit.done);
     }
+    
 }

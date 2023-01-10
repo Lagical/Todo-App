@@ -6,7 +6,6 @@ import { HttpClient } from '@angular/common/http';
 })
 export class CrudService {
 
-  //onGetData: EventEmitter = new EventEmitter();
   
   constructor(
     private http : HttpClient,
@@ -14,8 +13,9 @@ export class CrudService {
 
   todoUpdated = new EventEmitter<any>();
 
-  updateTodos(todos: any){
-    this.todoUpdated.emit(todos);
+  //get updated data from json "db" after changes have been made
+  updateTodos(){
+    this.todoUpdated.emit(this.getTodo());
   }
 
   //add data to json "db"
@@ -30,8 +30,6 @@ export class CrudService {
 
   //update data to json "db"
   updateTodo(data: any, id: number){
-    console.log(data.todoTitle + "in service update");
-    this.todoUpdated.emit(data);
     return this.http.put<any>("http://localhost:3000/todoList/"+id, data)
   }
 

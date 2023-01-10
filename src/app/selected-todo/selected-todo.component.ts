@@ -39,16 +39,18 @@ export class SelectedTodoComponent implements OnInit {
     this.crud.updateTodo(data, data.id)
       .subscribe({
         next:(all)=>{
-          
+          this.crud.updateTodos();
         },
         error:()=>{
         }
       })
   }
 
-  //alert
+  //alert lasting 5 seconds
   openSnackBar() {
-    this.snackBar.open("Todo successfully deleted", "Close");
+    this.snackBar.open("Todo successfully deleted", "Close",{ 
+      duration: 5000
+  });
   }
 
   //open new dialog with prefilled form based on id, update json "db" after done editing
@@ -58,7 +60,6 @@ export class SelectedTodoComponent implements OnInit {
     })
     .afterClosed()
     .subscribe(value=>{
-
       this.getTodosToUpdate();
     })
   }
@@ -77,6 +78,7 @@ export class SelectedTodoComponent implements OnInit {
   deleteTodo(id: number){
     this.crud.deleteTodo(id).subscribe({
       next:(all)=>{
+        this.crud.updateTodos();
         this.openSnackBar();
         this.getTodosToUpdate();
       },

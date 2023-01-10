@@ -3,7 +3,7 @@
   <form [formGroup]="todoForm">
     <mat-form-field appearance="fill">
       <mat-label>Title</mat-label>
-      <input formControlName="todoTitle" matInput>
+      <input placeholder="Max length 15 characters" formControlName="todoTitle" maxlength="15" matInput>
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Text</mat-label>

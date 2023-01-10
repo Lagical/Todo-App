@@ -19,7 +19,7 @@ export class AppComponent implements OnInit{
   title = 'Todo-App';
 
   todos: Todo[] = [];
-  
+
   constructor(
     private matDialog: MatDialog,
     private crud : CrudService,
@@ -47,11 +47,9 @@ export class AppComponent implements OnInit{
 
 
   ngOnInit(): void {
-    //this.getTodos();
+    this.getTodos();
     this.crud.todoUpdated.subscribe(data=>{
-      console.log(data.id+ " in parent component")
       this.getTodos();
     })
-    this.getTodos();
   }
 }

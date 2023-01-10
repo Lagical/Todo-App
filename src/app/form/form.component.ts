@@ -27,9 +27,11 @@ export class FormComponent implements OnInit{
     this.matDialogRef.close();
   }
 
-  //alert
+  //alert lasting 5 seconds
   openSnackBar() {
-    this.snackBar.open("Todo successfully added", "Close");
+    this.snackBar.open("Todo successfully added", "Close",{ 
+      duration: 5000
+  });
   }
 
 
@@ -51,7 +53,7 @@ export class FormComponent implements OnInit{
   //create form
   ngOnInit(): void {
     this.todoForm = this.formBuilder.group({
-      todoTitle : ['', Validators.required],
+      todoTitle : ['', [Validators.required, Validators.maxLength(15)]],
       todoText : ['', Validators.required],
       done : false
     })
