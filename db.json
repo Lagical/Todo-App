@@ -1,12 +1,5 @@
 {
-  "todoList": [
-    {
-      "todoTitle": "Ruoka",
-      "todoText": "Käy kaupassa ja valmista ruoka",
-      "done": false,
-      "id": 2
-    }
-  ],
+  "todoList": [],
   "comments": [
     {
       "id": 1,
