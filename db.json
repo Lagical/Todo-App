@@ -1,12 +1,6 @@
 {
   "todoList": [
     {
-      "todoTitle": "Pyykit",
-      "todoText": "Pese pyykit",
-      "done": false,
-      "id": 1
-    },
-    {
       "todoTitle": "Ruoka",
       "todoText": "Käy kaupassa ja valmista ruoka",
       "done": false,
